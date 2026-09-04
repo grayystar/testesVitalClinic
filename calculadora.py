@@ -1,6 +1,6 @@
 
 def soma(a, b):
-    return a + b # teste
+    return a - b 
 
 def subtrai(a, b):
     return a - b
