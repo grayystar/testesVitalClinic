@@ -1,0 +1,630 @@
+/* ===== 1. VARIÁVEIS DE COR ===== */
+/* :root é um seletor especial que representa a página inteira (a "raiz" do documento).
+   Definir cores aqui, como variáveis, significa que se um dia você quiser mudar o teal
+   principal do site inteiro, muda em UM lugar só, em vez de procurar em 20 arquivos */
+:root {
+  --color-primary: #0aa6bd;
+  /*  o teal principal: cor de botão de ação, links ativos, destaques.
+     Pinçado direto do botão "Entrar" do print do site real */
+
+  --color-primary-dark: #087a8c;
+  /*  uma versão mais escura do teal, pra usar quando o mouse passa em cima de um botão
+     (efeito ":hover"), dá um feedback visual de "isso é clicável" */
+
+  --color-navy: #154275;
+  /*  o azul petróleo escuro, usado no gradiente do painel de login e em textos de destaque */
+
+  --color-bg: #e8f4f8;
+  /*  o azul bem clarinho usado de fundo da página inteira (por trás dos cartões brancos) */
+
+  --color-card: #ffffff;
+  /*  branco puro, é a cor de fundo de todo "cartão" (caixinha) de conteúdo */
+
+  --color-badge-bg: #e6f6fa;
+  /*  um teal bem clarinho, usado de fundo em selinhos de status (tipo "Confirmada") */
+
+  --color-text-dark: #1a3a42;
+  /*  quase preto, mas puxando pro azul, cor padrão de título e texto importante */
+
+  --color-text-muted: #5a8a95;
+  /*  um cinza-azulado mais claro, usado em texto secundário, tipo legendas e subtítulos */
+
+  --color-danger: #e74c3c;
+  /*  vermelho, reservado só pra ações de "perigo" (cancelar consulta, excluir algo) */
+
+  --radius-card: 14px;
+  /*  o quanto os cantos dos cartões são arredondados. Guardar isso numa variável também
+     garante que TODOS os cartões do site tenham o mesmo arredondamento, sem inconsistência */
+
+  --shadow-card: 0 1px 4px rgba(0, 0, 0, 0.08);
+  /*  uma sombra bem sutil por trás dos cartões, pra dar profundidade (parecer que o
+     cartão está "flutuando" um pouquinho acima do fundo). rgba(0,0,0,0.08) é preto
+     com só 8% de opacidade, quase transparente, por isso fica discreto */
+}
+
+/* ===== 2. RESET BÁSICO ===== */
+/* Cada navegador tem margens e espaçamentos padrão diferentes pra elementos como <h1>,
+   <p>, <ul>. Esse "reset" zera tudo isso, pra gente começar do zero e controlar
+   exatamente o espaçamento que queremos, em vez de brigar com o padrão de cada navegador */
+* {
+  box-sizing: border-box;
+  /*  muda a forma como o navegador calcula a largura de um elemento: com isso, o
+     padding (espaçamento interno) e a borda passam a ser contados dentro da largura
+     definida, em vez de somados por fora. Sem isso, um elemento com width:100%(largura) e
+     padding(espaçamento) acaba ficando mais largo que o esperado e "vazando" pra fora do card */
+
+  margin: 0;
+  padding: 0;
+  /*  zera a margem e o espaçamento interno padrão de TODO elemento da página,
+     o "*" no começo do seletor significa "aplica isso a absolutamente tudo" */
+}
+
+/* ===== 3. CORPO DA PÁGINA ===== */
+body {
+  font-family: 'Nunito', sans-serif;
+  /*  a mesma fonte usada no protótipo do app. "sans-serif" é o plano B: se por
+     algum motivo a fonte Nunito não carregar, o navegador usa qualquer fonte sem
+     serifa disponível, em vez de quebrar o visual */
+
+  background: var(--color-bg);
+  /*  var(--color-bg) "puxa" o valor que a gente definiu lá em cima, no :root.
+     É assim que se usa uma variável de CSS depois de declarada */
+
+  color: var(--color-text-dark);
+  /*  cor de texto padrão da página inteira (a menos que algum elemento específico
+     sobrescreva isso depois) */
+
+  min-height: 100vh;
+  /*  garante que o fundo cubra a tela inteira mesmo se o conteúdo for curto.
+     "vh" = "viewport height", ou seja, 100vh = 100% da altura visível da tela */
+}
+
+/* ===== 4. CONTAINER (largura máxima do conteúdo) ===== */
+/* Mesmo escolhendo "largura total como o site de admin", não queremos o texto esticando
+   de ponta a ponta numa tela ultrawide, fica cansativo de ler. Esse container central
+   limita a largura, mas ainda ocupa bastante espaço */
+.container {
+  max-width: 1200px;
+  /*  a largura do conteúdo nunca ultrapassa 1200 pixels, mesmo em monitores gigantes */
+
+  margin: 0 auto;
+  /*  margem 0 em cima/embaixo, e "auto" nos lados esquerdo/direito, esse "auto" é o
+     truque clássico de CSS pra centralizar um bloco horizontalmente na tela */
+
+  padding: 0 24px;
+  /*  um respiro de 24px nas laterais, pra o conteúdo não colar na borda da tela em
+     telas menores (onde o max-width de 1200px ainda não faz efeito) */
+}
+
+/* ===== 5. BARRA DE NAVEGAÇÃO (topo) ===== */
+.topbar {
+  background: var(--color-card);
+  /*  fundo branco, igual ao navbar do site de admin/médico */
+
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  /*  sombrinha sutil embaixo da barra, pra separar visualmente do conteúdo da página */
+
+  display: flex;
+  /*  "flex" transforma esse elemento num "container flexível": os filhos dele (logo,
+     links, botão sair) se organizam automaticamente numa linha, um do lado do outro */
+
+  align-items: center;
+  /*  alinha todos os itens dessa linha verticalmente ao centro (senão o logo, que é
+     maior, ficaria "mais alto" que os links de texto) */
+
+  justify-content: space-between;
+  /*  empurra o primeiro item pra ponta esquerda e o último pra ponta direita,
+     distribuindo o espaço vazio no meio deles, é assim que o logo fica à esquerda
+     e o botão "Sair" fica lá na direita, com os links no centro */
+
+  padding: 16px 24px;
+  /*  espaçamento interno da barra: 16px em cima/embaixo, 24px nos lados */
+}
+
+.topbar-logo {
+  font-weight: 800;
+  /*  800 é um peso de fonte bem "grosso" (negrito forte), deixa o nome da marca
+     com mais destaque */
+
+  font-size: 20px;
+  color: var(--color-navy);
+}
+
+.topbar-nav {
+  display: flex;
+  gap: 8px;
+  /*  "gap" cria um espaço automático entre os itens de um flex container, sem
+     precisar ficar colocando margem manualmente em cada link */
+}
+
+.topbar-nav a {
+  color: var(--color-text-muted);
+  /*  os links começam com a cor "apagada" (texto secundário) */
+
+  text-decoration: none;
+  /*  remove o sublinhado padrão de link */
+
+  font-weight: 700;
+  font-size: 14px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  /*  20px de arredondamento é o suficiente pra virar uma "pílula" (cantos bem redondos),
+     igual às abas do protótipo do app */
+
+  transition: background 0.2s, color 0.2s;
+  /*  quando o "background" ou o "color" mudar (por causa do hover ou da classe .active),
+     a mudança acontece suavemente ao longo de 0.2 segundos, em vez de trocar "seco" */
+}
+
+.topbar-nav a:hover {
+  background: var(--color-badge-bg);
+  /*  ":hover" é um estado especial: essas regras só valem enquanto o mouse está
+     em cima do link. Aqui, ao passar o mouse, o fundo fica com aquele teal clarinho */
+}
+
+.topbar-nav a.active {
+  background: var(--color-badge-bg);
+  color: var(--color-primary);
+  /*  ".active" é uma classe que a gente vai adicionar via PHP no link da página atual
+     (ex.: se a pessoa está em "Minhas consultas", só o link de Consultas ganha essa
+     classe), assim ela sabe visualmente em qual tela está */
+}
+
+.btn-sair {
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  background: transparent;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  /*  muda o formato do cursor do mouse pra "mãozinha" ao passar em cima, avisando
+     que aquilo é clicável (útil aqui porque geralmente isso vai ser um <button>) */
+}
+
+/* ===== 6. BOTÕES ===== */
+.btn {
+  display: inline-block;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 12px 20px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  /*  essas são as regras "em comum" de qualquer botão do site: tamanho, fonte,
+     arredondamento. As classes abaixo (.btn-primary, .btn-outline...) só adicionam
+     a cor por cima dessa base, então um botão sempre usa ".btn" junto com uma delas,
+     tipo: <button class="btn btn-primary"> */
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-dark);
+  /*  escurece um pouco no hover, dando feedback de que é clicável */
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.btn-danger {
+  background: transparent;
+  color: var(--color-danger);
+  border: 2px solid var(--color-danger);
+  /*  reservado pra ações tipo "Cancelar consulta", a cor vermelha já avisa
+     visualmente que é uma ação mais séria, antes mesmo da pessoa ler o texto */
+}
+
+/* ===== 7. CARTÕES ===== */
+.card {
+  background: var(--color-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 20px;
+  margin-bottom: 16px;
+  /*  esse é o "cartão" genérico que vimos no print do dashboard admin (aquelas
+     caixinhas brancas com "Hoje", "Pendentes", etc.), toda tela nova do paciente
+     vai usar essa mesma classe pra qualquer bloco de conteúdo */
+}
+
+/* ===== 8. FORMULÁRIOS ===== */
+.form-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--color-text-dark);
+  margin-bottom: 4px;
+}
+
+.form-subtitle {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+}
+
+.field-label {
+  display: block;
+  /*  força o rótulo a ocupar a linha inteira sozinho, empurrando o campo de
+     input pra linha de baixo, em vez de ficar tudo espremido lado a lado */
+
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin-bottom: 4px;
+}
+
+.field-input {
+  width: 100%;
+  background: var(--color-bg);
+  border: 2px solid transparent;
+  /*  começa com borda "invisível" (transparent), mas já reservando o espaço dela,
+     assim, quando a borda aparecer de verdade no :focus (próxima regra), o campo não
+     "pula" de tamanho na tela */
+
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-family: 'Nunito', sans-serif;
+  color: var(--color-text-dark);
+  margin-bottom: 16px;
+  outline: none;
+  /*  remove aquele contorno azul padrão que o navegador coloca em campos
+     selecionados, a gente vai fazer o nosso próprio indicador de foco */
+}
+
+.field-input:focus {
+  border-color: var(--color-primary);
+  /*  ":focus" é o estado de quando a pessoa clicou no campo e está digitando nele.
+     Aqui a borda (que era transparente) vira teal, mostrando claramente qual
+     campo está ativo no momento */
+}
+
+/* ===== 9. SELOS DE STATUS (badges) ===== */
+.badge {
+  display: inline-block;
+  background: var(--color-badge-bg);
+  color: var(--color-primary);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  /*  é o selinho tipo "Confirmada" que vimos no print do dashboard, fundo teal
+     clarinho, texto teal, bem arredondado */
+}
+
+/* ===== 10. MENSAGENS FLASH ===== */
+/* flash()/take_flash() que a gente fez no helpers.php, Essas duas classes
+   são exatamente pra estilizar essas mensagens quando elas aparecem na tela */
+.flash-success {
+  background: #e6f6ea;
+  color: #1c7c3c;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.flash-error {
+  background: #fdecea;
+  color: #c0392b;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  /*  mesma ideia da de cima, só que com tons de vermelho, pra erro ficar
+     visualmente diferente de sucesso, mesmo sem a pessoa ler o texto */
+}
+
+/* ===== 11. UTILITÁRIOS ===== */
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-center {
+  text-align: center;
+  /*  classes "utilitárias" são pequenos atalhos reutilizáveis, em vez de criar uma
+     classe nova toda vez que precisar centralizar um texto, é só grudar "text-center"
+     em qualquer elemento */
+}
+
+
+/* ===== 12. DASHBOARD: DESTAQUE DE CONSULTA E ATALHOS ===== */
+.section-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--color-text-dark);
+  /* título pequeno de seção (tipo "Atalhos"), reaproveitado do protótipo do app */
+}
+
+.appointment-highlight {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  /* flex-wrap: wrap permite que, se a tela for estreita demais pra caber tudo numa
+     linha só, o conteúdo "quebra" pra linha de baixo, em vez de espremer ou vazar */
+}
+
+.appointment-doctor {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--color-text-dark);
+}
+
+.appointment-meta {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+  /* antes, esses dois estilos só funcionavam se estivessem DENTRO de um elemento
+     com a classe .appointment-highlight-info (lembra do "espaço = está dentro de"
+     do CSS?). Tirando essa exigência, essas classes ficam "soltas" e podem ser
+     usadas em qualquer lugar novo, como o cartão, sem
+     precisar reescrever o mesmo estilo duas vezes. O uso no dashboard continua
+     funcionando normalmente, porque nada te impede de usar uma classe "solta"
+     dentro de outro elemento também */
+}
+
+/* ===== 12b. CARTÕES INDIVIDUAIS (cada consulta/médico é o SEU PRÓPRIO cartão) ===== */
+.appointment-card {
+  background: var(--color-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 18px 20px;
+  margin-bottom: 14px;
+  /* essa é a mesma "receita" do .card genérico, só que pensada pra ficar em
+     LISTA: cada uma dessas já nasce com margem embaixo, empurrando a próxima
+     pra baixo, sem precisar de div nem linha divisória entre elas */
+}
+
+.appointment-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+  /* fileira de cima do cartão: o que estiver à esquerda (badge, ou nome do
+     médico) e o que estiver à direita (botão) ficam nas pontas opostas, com
+     o espaço vazio distribuído no meio, a mesma ideia do .topbar que já
+     construímos, só que numa escala menor, dentro do cartão */
+}
+
+.btn-sm {
+  /* versão menor do botão, pra caber bem dentro de um cartão de lista sem
+     dominar o espaço todo, some junto com .btn e .btn-danger/.btn-outline,
+     tipo: <button class="btn btn-danger btn-sm"> */
+  padding: 6px 14px;
+  font-size: 13px;
+}
+
+.shortcut-grid {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.shortcut-card {
+  flex: 1;
+  min-width: 160px;
+  /* "flex: 1" faz cada cartão dividir o espaço disponível igualmente entre eles.
+     "min-width: 160px" garante que, mesmo dividindo espaço, nenhum cartão fica
+     menor que 160px, é isso que força a quebra de linha em telas estreitas,
+     em vez de espremer os cartões até ficarem ilegíveis */
+
+  background: var(--color-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--color-text-dark);
+  font-weight: 700;
+  transition: transform 0.15s;
+  /* prepara uma transição suave pra propriedade "transform" (que vamos mudar no
+     hover, logo abaixo), sem isso, o efeito aconteceria "seco", de uma vez */
+}
+
+.shortcut-card:hover {
+  transform: translateY(-2px);
+  /* translateY(-2px) move o elemento 2 pixels PRA CIMA (valor negativo = pra cima).
+     Combinado com a "transition" de cima, dá um efeitinho sutil de "levantar" o
+     cartão quando o mouse passa em cima, indicando que é clicável */
+}
+
+.shortcut-card .shortcut-icon {
+  display: block;
+  margin: 0 auto 8px;
+  color: var(--color-primary);
+  /* "color" aqui não pinta texto, pinta o ícone SVG de dentro, através da
+     propriedade "currentColor" que vamos usar no SVG (explico embaixo) */
+}
+
+.shortcut-card .shortcut-icon svg {
+  width: 28px;
+  height: 28px;
+  /* controla o tamanho do desenho */
+}
+
+/* Divisória */
+.divider {
+  height: 1px;
+  background: #e8f4f8;
+  margin: 12px 0;
+  /* uma "linha" bem fina (1px de altura), colorida igual o fundo do site, dá
+     uma separação visual sutil entre os itens da lista, sem precisar de bordas
+     mais pesadas */
+}
+
+/* AGENDA */
+.time-slot-grid {
+    /* container que vai segurar os botõezinhos de horário lado a lado */
+    display: flex;
+    flex-wrap: wrap; /* quando não couber mais na linha, quebra pra próxima */
+    gap: 8px; /* espacinho entre um botão e outro */
+    margin-bottom: 16px;
+}
+
+.time-slot-btn {
+    /* o botão de cada horário (tipo "09:00") */
+    background: var(--color-badge-bg); /* mesmo azul clarinho do badge de status */
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer; /* mãozinha ao passar o mouse, indicando que é clicável */
+}
+
+.time-slot-btn:hover {
+    /* inverte as cores ao passar o mouse, pra dar um feedback visual */
+    background: var(--color-primary);
+    color: #fff;
+}
+
+/* MARCAR CONSULTA */
+.date-pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.date-pill {
+    /* a "pilula" de cada data clicável, parecida com os links do menu de cima */
+    display: inline-block;
+    background: var(--color-badge-bg);
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: 2px solid transparent;
+}
+
+.date-pill:hover {
+    border-color: var(--color-primary);
+}
+
+.date-pill.active {
+    /* a data que está sendo mostrada no momento fica destacada, preenchida
+       de teal sólido, pra ficar óbvio qual dia você está vendo */
+    background: var(--color-primary);
+    color: #fff;
+}
+
+/* CALENDARIO E HORARIOS */
+.agendar-grid {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    /* em telas estreitas, o card de horários desce pra debaixo do
+       calendário, em vez de espremer os dois lado a lado até ficar ilegível */
+}
+
+.calendar-card {
+    flex: 1 1 380px;
+    /* "flex-basis" de 380px: cada card TENTA ocupar 380px, mas o primeiro
+       "1" permite crescer se sobrar espaço, e o segundo "1" permite encolher
+       se a tela for estreita */
+}
+
+.horarios-card {
+    flex: 1 1 300px;
+}
+
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-weight: 800;
+    font-size: 16px;
+    color: var(--color-text-dark);
+}
+
+.calendar-nav-arrow {
+    text-decoration: none;
+    color: var(--color-primary);
+    font-size: 20px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 8px;
+}
+
+.calendar-nav-arrow:hover {
+    background: var(--color-badge-bg);
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    /* "repeat(7, 1fr)" cria 7 colunas de larguras IGUAIS (uma pra cada dia
+       da semana). "1fr" significa "1 fração do espaço disponível" */
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    margin-bottom: 6px;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    /* cada "casinha" (vazia ou com número) é um item dentro dessa grade de
+       7 colunas. O navegador quebra pra próxima linha sozinho a cada 7
+       itens, não precisamos montar "semana por semana" na mão em HTML */
+}
+
+.calendar-day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    /* obriga cada casinha a ser um quadrado (altura sempre igual à largura) */
+    border-radius: 8px;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.calendar-day.disabled {
+    /* dias SEM horário livre: fundo azul bem clarinho, texto discreto,
+       dá pra ver que ali existe um dia, mas não chama atenção nenhuma */
+    background: var(--color-badge-bg);
+    color: var(--color-text-muted);
+}
+
+.calendar-day.available {
+    /* dias COM horário livre: fundo azul forte (sólido), texto branco,
+       agora é isso que salta aos olhos primeiro na grade do calendário */
+    background: var(--color-primary);
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.calendar-day.available:hover {
+    background: var(--color-primary-dark);
+    /* escurece ainda mais ao passar o mouse, reforçando que é clicável */
+}
+
+.calendar-day.selected {
+    /* o dia escolhido agora usa o azul petróleo mais escuro, pra se destacar
+       tanto dos indisponíveis (clarinhos) quanto dos disponíveis comuns
+       (teal), fica óbvio qual dia está sendo mostrado no card ao lado */
+    background: var(--color-navy);
+    color: #fff;
+    font-weight: 800;
+}

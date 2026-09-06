@@ -1,24 +1,37 @@
-name: Python application
+name: Testes Vital Clinic
 
 on:
   push:
-    branches:
-      - main
+  pull_request:
 
 jobs:
-  build:
+  testes:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.8'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Run tests
-      run: |
-        python -m unittest test_calculadora.py
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+      - name: Configurar PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          extensions: mbstring
+
+      - name: Verificar versão do PHP
+        run: php -v
+
+      - name: Teste de Login
+        run: php tests/tests_auth.php
+
+      - name: Teste de Recuperação de Senha
+        run: php tests/tests_recovery.php
+
+      - name: Teste de Médicos
+        run: php tests/tests_medicos.php
+
+      - name: Teste de Pacientes
+        run: php tests/tests_pacientes.php
+
+      - name: Teste de Consultas
+        run: php tests/tests_consultas.php

@@ -1,0 +1,1874 @@
+:root {
+    --bg: #eef8fb;
+    --surface: #ffffff;
+    --surface-alt: #e6f6fa;
+    --text: #173a70;
+    --muted: #5d7190;
+    --line: #c8dce8;
+    --primary: #0aa6bd;
+    --primary-strong: #173a70;
+    --accent: #0aa6bd;
+    --danger: #b42318;
+    --warning: #b54708;
+    --success: #047857;
+    --shadow: 0 12px 32px rgba(23, 58, 112, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-width: 320px;
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Nunito", Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 60px;
+    padding: 10px 100px 10px 12px;
+    border-bottom: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(10px);
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text);
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.brand:hover {
+    text-decoration: none;
+}
+
+.brand-logo {
+    display: block;
+    width: 150px;
+    height: 58px;
+    object-fit: contain;
+    object-position: center;
+}
+
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.topbar-logout {
+    position: fixed;
+    top: 14px;
+    right: 14px;
+    z-index: 1002;
+}
+
+.topbar-logout .button {
+    min-height: 60px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 500px;
+    background: #dc2626;
+    color: #fff;
+    font-weight: 800;
+    box-shadow: 0 2px 10px rgba(220, 38, 38, 0.3);
+}
+
+.topbar-logout .button:hover {
+    background: #b91c1c;
+}
+
+.nav-toggle {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+    cursor: pointer;
+}
+
+.nav-toggle-bar {
+    display: block;
+    height: 2px;
+    margin: 0 9px;
+    background: var(--text);
+    border-radius: 2px;
+}
+
+/* Mobile-first: o menu fica recolhido por padrão e vira uma gaveta que
+   desce por baixo da topbar quando aberto (classe .is-open via JS). */
+.nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    margin-top: 1px;
+    padding: 10px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    max-height: calc(100vh - 68px);
+    overflow-y: auto;
+}
+
+.nav.is-open {
+    display: flex;
+}
+
+.nav a {
+    padding: 12px 10px;
+    border-radius: 8px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.nav a.active {
+    background: var(--surface-alt);
+    color: var(--primary-strong);
+    font-weight: 700;
+}
+
+.shell {
+    width: min(1180px, calc(100% - 24px));
+    margin: 16px auto 40px;
+}
+
+.app-footer {
+    width: min(1180px, calc(100% - 24px));
+    margin: 0 auto 20px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+}
+
+.app-footer span {
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 0.03em;
+}
+
+.page-head {
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.page-head h1,
+.auth-copy h1,
+.form-card h1 {
+    margin: 0;
+    font-size: 24px;
+    line-height: 1.15;
+}
+
+h2 {
+    margin: 0 0 14px;
+    font-size: 20px;
+}
+
+h3 {
+    margin: 16px 0 10px;
+    font-size: 16px;
+}
+
+.eyebrow {
+    margin: 0 0 4px;
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.muted,
+small {
+    color: var(--muted);
+}
+
+.muted-link {
+    display: inline-block;
+    margin-top: 8px;
+}
+
+.panel,
+.stat {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+}
+
+.panel {
+    padding: 16px;
+}
+
+.narrow {
+    width: min(560px, 100%);
+    margin: 0 auto;
+}
+
+.auth-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: center;
+    gap: 20px;
+}
+
+.auth-copy {
+    padding: 24px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #173a70 0%, #0b6f91 58%, #0aa6bd 130%);
+    color: #fff;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.auth-logo {
+    display: block;
+    width: min(460px, 100%);
+    height: 160px;
+    object-fit: contain;
+    object-position: center;
+    margin: 0 auto 24px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.94);
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.auth-copy p {
+    max-width: 540px;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 18px;
+}
+
+.mini-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.mini-list span,
+.chip {
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 999px;
+    padding: 7px 10px;
+    background: rgba(255, 255, 255, 0.12);
+    color: inherit;
+}
+
+.grid {
+    display: grid;
+    gap: 18px;
+}
+
+/* Mobile-first: uma coluna por padrão; vira duas a partir do tablet. */
+.grid.two {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.stats {
+    grid-template-columns: minmax(0, 1fr);
+    margin-bottom: 18px;
+}
+
+.stat {
+    padding: 16px;
+}
+
+.stat span {
+    display: block;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.stat strong {
+    display: block;
+    margin-top: 8px;
+    font-size: 30px;
+    line-height: 1;
+}
+
+.form-card,
+.subform {
+    display: grid;
+    align-content: start;
+    gap: 14px;
+}
+
+.role-picker {
+    display: flex;
+    gap: 8px;
+}
+
+.role-option {
+    flex: 1;
+    min-height: 42px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.role-option:hover {
+    border-color: var(--primary);
+}
+
+.role-option.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+}
+
+.code-input {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 12px;
+    text-align: center;
+}
+
+label {
+    display: grid;
+    gap: 6px;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    min-height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--text);
+    padding: 9px 10px;
+    font-size: 16px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 3px solid rgba(10, 166, 189, 0.22);
+    border-color: var(--primary);
+}
+
+.autocomplete {
+    position: relative;
+}
+
+.autocomplete-input {
+    margin: 0;
+}
+
+.autocomplete-list {
+    position: absolute;
+    z-index: 20;
+    left: 0;
+    right: 0;
+    top: calc(100% + 4px);
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.autocomplete-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.autocomplete-item strong {
+    font-size: 14px;
+    color: var(--text);
+}
+
+.autocomplete-item .muted {
+    font-size: 12px;
+}
+
+.autocomplete-item:hover,
+.autocomplete-item.is-active {
+    background: var(--surface-alt);
+}
+
+.autocomplete-empty {
+    padding: 8px 10px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--text);
+    padding: 8px 14px;
+    font-weight: 800;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.button:hover {
+    text-decoration: none;
+    border-color: var(--primary);
+}
+
+.button.primary {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: #fff;
+}
+
+.button.primary:hover {
+    background: var(--primary-strong);
+    border-color: var(--primary-strong);
+}
+
+.button.ghost {
+    min-height: 38px;
+    background: transparent;
+}
+
+.button.small {
+    min-height: 36px;
+    padding: 6px 10px;
+    font-size: 13px;
+}
+
+.button.danger {
+    border-color: rgba(180, 35, 24, 0.3);
+    color: var(--danger);
+}
+
+.button.warning {
+    border-color: rgba(181, 71, 8, 0.3);
+    color: var(--warning);
+}
+
+.inline {
+    display: inline-flex;
+}
+
+.form-links {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.filters {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: end;
+    gap: 12px;
+}
+
+.filters.compact {
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: 10px;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 8px;
+    margin: 0 0 18px;
+    padding: 0;
+    list-style: none;
+    counter-reset: steps;
+}
+
+.steps li {
+    counter-increment: steps;
+    min-height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.steps li::before {
+    content: counter(steps);
+    display: inline-grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    margin-right: 8px;
+    border-radius: 999px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 12px;
+}
+
+.book-grid {
+    align-items: start;
+    margin-top: 18px;
+}
+
+.slot-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    min-height: 46px;
+}
+
+.slot-grid label {
+    position: relative;
+    display: block;
+    font-weight: 800;
+}
+
+.slot-grid input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.slot-grid span {
+    display: grid;
+    place-items: center;
+    min-height: 40px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--text);
+}
+
+.slot-grid input:checked + span {
+    border-color: var(--primary);
+    background: var(--surface-alt);
+    color: var(--primary-strong);
+}
+
+.list {
+    display: grid;
+    gap: 10px;
+}
+
+.list-row {
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 58px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px;
+    background: var(--surface);
+}
+
+.list-row strong,
+.list-row span,
+.list-row small {
+    display: block;
+}
+
+.list-row.unread {
+    border-color: rgba(10, 166, 189, 0.55);
+    background: var(--surface-alt);
+}
+
+.table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+}
+
+/* Alternativa "cartão empilhado" para telas pequenas: ativada via JS
+   (setupResponsiveTables em app.js), que adiciona a classe abaixo e um
+   atributo data-label em cada célula com o texto do <th> correspondente.
+   Sem JS, a tabela cai no fallback de rolagem horizontal acima. */
+@media (max-width: 639.98px) {
+    .table-wrap table.responsive-cards {
+        min-width: 0;
+    }
+
+    .table-wrap table.responsive-cards thead {
+        display: none;
+    }
+
+    .table-wrap table.responsive-cards,
+    .table-wrap table.responsive-cards tbody,
+    .table-wrap table.responsive-cards tr,
+    .table-wrap table.responsive-cards td {
+        display: block;
+        width: 100%;
+    }
+
+    .table-wrap table.responsive-cards tr {
+        margin-bottom: 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 10px 12px;
+        background: var(--surface);
+    }
+
+    .table-wrap table.responsive-cards td {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        border-bottom: 1px solid var(--bg);
+        padding: 8px 0;
+        text-align: right;
+    }
+
+    .table-wrap table.responsive-cards td:last-child {
+        border-bottom: none;
+    }
+
+    .table-wrap table.responsive-cards td::before {
+        content: attr(data-label);
+        flex-shrink: 0;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        text-align: left;
+    }
+
+    .table-wrap table.responsive-cards td .actions {
+        justify-content: flex-end;
+    }
+}
+
+th,
+td {
+    border-bottom: 1px solid var(--line);
+    padding: 11px 10px;
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    color: var(--muted);
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+td small {
+    display: block;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    min-height: 26px;
+    border-radius: 999px;
+    padding: 3px 9px;
+    background: #eef8fb;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.status.confirmed,
+.status.completed {
+    background: #e6f6fa;
+    color: var(--primary-strong);
+}
+
+.status.pending {
+    background: #fff7ed;
+    color: var(--warning);
+}
+
+.status.cancelled,
+.status.no_show {
+    background: #fef3f2;
+    color: var(--danger);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.switch input {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    cursor: pointer;
+}
+
+.switch-track {
+    position: absolute;
+    inset: 0;
+    background: var(--line);
+    border-radius: 999px;
+    transition: background 0.15s ease;
+}
+
+.switch-track::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    background: var(--surface);
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(23, 58, 112, 0.3);
+    transition: transform 0.15s ease;
+}
+
+.switch input:checked + .switch-track {
+    background: var(--primary);
+}
+
+.switch input:checked + .switch-track::before {
+    transform: translateX(18px);
+}
+
+.switch input:focus-visible + .switch-track {
+    outline: 2px solid var(--primary-strong);
+    outline-offset: 2px;
+}
+
+.modal {
+    width: min(560px, calc(100% - 32px));
+    max-height: min(640px, calc(100vh - 32px));
+    border: none;
+    border-radius: 16px;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.modal-wide {
+    width: min(760px, calc(100% - 32px));
+}
+
+.modal .panel {
+    margin: 0;
+    max-height: min(640px, calc(100vh - 32px));
+    overflow-y: auto;
+}
+
+.modal::backdrop {
+    background: rgba(23, 58, 112, 0.45);
+}
+
+.modal-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.modal-head h2 {
+    margin: 0;
+}
+
+.modal-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 4px 8px;
+}
+
+.modal-close:hover {
+    color: var(--text);
+}
+
+/* Termos de Uso — modal bloqueante de primeiro acesso */
+.terms-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(15, 23, 42, 0.6);
+}
+
+.terms-modal {
+    position: fixed;
+    z-index: 2001;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(640px, calc(100% - 32px));
+    max-height: min(720px, calc(100vh - 32px));
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.terms-modal .modal-head h2 {
+    font-size: 20px;
+}
+
+.terms-text {
+    overflow-y: auto;
+    padding: 4px 12px 4px 0;
+    margin: 8px 0 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--bg);
+}
+
+.terms-text h3,
+.terms-text h4 {
+    margin: 16px 12px 6px;
+    color: var(--primary-strong, #173a70);
+}
+
+.terms-text h3:first-child {
+    margin-top: 12px;
+}
+
+.terms-text p,
+.terms-text ul {
+    margin: 0 12px 10px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.terms-text ul {
+    padding-left: 20px;
+}
+
+.terms-checkbox {
+    display: flex !important;
+    grid-template-columns: none !important;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 8px 0 14px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.terms-checkbox input {
+    width: auto;
+    min-height: auto;
+    margin-top: 3px;
+}
+
+/* Tutorial de primeiro acesso — tour guiado (destaque + balão) */
+
+/* Escurece a página inteira por trás do tour; a "luz" ao redor do item
+   destacado é feita pelo box-shadow gigante do .tour-highlight abaixo,
+   não por um recorte real — é o truque mais simples e leve de fazer um
+   efeito "spotlight" sem depender de SVG/canvas. */
+.tour-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 998;
+    background: rgba(15, 23, 42, 0.15);
+    pointer-events: none;
+}
+
+.tour-highlight {
+    position: fixed;
+    z-index: 999;
+    border-radius: 10px;
+    box-shadow: 0 0 0 9999px rgba(15, 23, 42, 0.55), 0 0 0 3px var(--primary-strong, #0aa6bd);
+    transition: top 0.25s ease, left 0.25s ease, width 0.25s ease, height 0.25s ease;
+    pointer-events: none;
+}
+
+.tour-tooltip {
+    position: fixed;
+    z-index: 1000;
+    width: min(320px, calc(100vw - 28px));
+    padding: 16px;
+}
+
+.tour-tooltip p {
+    margin: 0;
+    color: var(--muted);
+}
+
+.tutorial-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin: 16px 0;
+}
+
+.tutorial-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--line);
+}
+
+.tutorial-dot.is-active {
+    background: var(--primary-strong, #0aa6bd);
+}
+
+.tutorial-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.tutorial-nav-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.slot-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* Barra de pesquisa padronizada (Pacientes/Médicos — admin e médico) */
+.search-field {
+    position: relative;
+    display: block;
+}
+
+.search-field input {
+    min-height: 44px;
+    padding-left: 40px;
+    border-radius: 999px;
+}
+
+.search-field .search-icon {
+    position: absolute;
+    top: 50%;
+    left: 14px;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: var(--muted);
+    pointer-events: none;
+}
+
+.slot-picker label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 40px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    background: var(--surface);
+}
+
+/* Calendário do modal "Nova consulta" */
+.appointment-date-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+}
+
+.appointment-date-side {
+    display: grid;
+    gap: 14px;
+}
+
+.appointment-calendar {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px;
+    background: var(--bg);
+}
+
+.appointment-calendar-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.appointment-calendar-head strong {
+    font-size: 14px;
+    text-transform: capitalize;
+}
+
+.appointment-calendar-weekdays,
+.appointment-calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 4px;
+}
+
+.appointment-calendar-weekdays {
+    margin-bottom: 4px;
+}
+
+.appointment-calendar-weekdays span {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--muted);
+}
+
+.appointment-calendar-blank {
+    min-height: 1px;
+}
+
+.appointment-calendar-day {
+    min-height: 34px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.appointment-calendar-day:not(.is-disabled):hover {
+    background: var(--surface-alt);
+}
+
+.appointment-calendar-day.is-disabled {
+    color: var(--line);
+    cursor: not-allowed;
+}
+
+.appointment-calendar-day.is-selected {
+    background: var(--primary-strong);
+    border-color: var(--primary-strong);
+    color: #fff;
+}
+
+.appointment-calendar-hint {
+    margin: 10px 2px 0;
+    font-size: 12px;
+}
+
+@media (min-width: 640px) {
+    .appointment-date-grid {
+        grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+        align-items: start;
+    }
+}
+
+.slot-picker input[type="radio"] {
+    width: auto;
+    min-height: 0;
+    margin: 0;
+}
+
+.slot-picker label:has(input:checked) {
+    border-color: var(--primary);
+    background: var(--surface-alt);
+    color: var(--primary-strong);
+}
+
+.alert {
+    margin-bottom: 16px;
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-weight: 700;
+}
+
+.alert-success {
+    border: 1px solid rgba(10, 166, 189, 0.25);
+    background: #e6f6fa;
+    color: var(--primary-strong);
+}
+
+.alert-error {
+    border: 1px solid rgba(180, 35, 24, 0.25);
+    background: #fef3f2;
+    color: var(--danger);
+}
+
+.toast-stack {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: min(360px, calc(100vw - 32px));
+}
+
+.toast {
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-weight: 700;
+    box-shadow: var(--shadow);
+    animation: toast-in 0.18s ease-out;
+}
+
+.toast-success {
+    border: 1px solid rgba(10, 166, 189, 0.25);
+    background: #e6f6fa;
+    color: var(--primary-strong);
+}
+
+.toast-error {
+    border: 1px solid rgba(180, 35, 24, 0.25);
+    background: #fef3f2;
+    color: var(--danger);
+}
+
+@keyframes toast-in {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.accordion-list {
+    display: grid;
+    gap: 12px;
+}
+
+.doctor-card {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px;
+    background: var(--surface);
+}
+
+.doctor-card summary {
+    cursor: pointer;
+    font-weight: 800;
+}
+
+.doctor-card summary small {
+    display: block;
+    margin-top: 2px;
+    font-weight: 400;
+}
+
+.split-line {
+    height: 1px;
+    margin: 16px 0;
+    background: var(--line);
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.chip {
+    border-color: var(--line);
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+}
+
+.muted-chip {
+    background: #f4fbfd;
+    color: var(--muted);
+    cursor: default;
+}
+
+.chip-form {
+    display: inline-flex;
+}
+
+.danger-zone {
+    margin-top: 18px;
+}
+
+.date-switch {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.timeline {
+    display: grid;
+    gap: 8px;
+    max-height: 620px;
+    overflow-y: auto;
+}
+
+.timeline-row {
+    display: grid;
+    grid-template-columns: 68px minmax(0, 1fr);
+    gap: 10px;
+    min-height: 42px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 9px;
+    background: var(--surface);
+}
+
+.timeline-row time {
+    font-weight: 800;
+}
+
+.timeline-row.booked {
+    border-color: rgba(10, 166, 189, 0.4);
+    background: var(--surface-alt);
+}
+
+.timeline-row.blocked {
+    border-color: rgba(180, 35, 24, 0.22);
+    background: #fef3f2;
+}
+
+.calendar-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 12px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 6px;
+    border-radius: 999px;
+    background: var(--primary);
+}
+
+.confirmed-dot {
+    background: var(--primary);
+}
+
+.pending-dot {
+    background: #ffb88c;
+}
+
+.completed-dot {
+    background: #bdf7a8;
+}
+
+.cancelled-dot {
+    background: var(--danger);
+}
+
+.no_show-dot {
+    background: var(--muted);
+}
+
+.calendar-scroll {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(120px, 1fr));
+    gap: 8px;
+    /* Em telas estreitas o contêiner rola horizontalmente em vez de
+       espremer os 7 dias em menos colunas (o que quebraria o
+       alinhamento com o cabeçalho da semana). */
+    min-width: 840px;
+}
+
+.calendar-weekday,
+.calendar-day {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+    padding: 10px;
+}
+
+.calendar-weekday {
+    text-align: center;
+    background: var(--surface-alt);
+}
+
+.calendar-day {
+    min-height: 130px;
+}
+
+.muted-day {
+    background: #f4fbfd;
+}
+
+.calendar-event {
+    display: block;
+    margin-top: 7px;
+    border-radius: 6px;
+    padding: 5px 6px;
+    background: #dff7fb;
+    color: var(--primary-strong);
+    font-size: 12px;
+}
+
+.calendar-event.confirmed {
+    background: #e6f6fa;
+    color: var(--primary-strong);
+}
+
+.calendar-event.pending {
+    background: #fff7ed;
+    color: var(--warning);
+}
+
+.calendar-event.completed {
+    background: #ecfdf3;
+    color: var(--success);
+}
+
+.calendar-event.cancelled {
+    background: #fef3f2;
+    color: var(--danger);
+    text-decoration: line-through;
+}
+
+.calendar-event.no_show {
+    background: var(--surface-alt);
+    color: var(--muted);
+}
+
+.mini-card {
+    min-height: 72px;
+    border-radius: 8px;
+    background: var(--surface);
+    padding: 14px;
+}
+
+.mini-card span {
+    display: block;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.notice {
+    margin-top: 18px;
+    border: 1px solid #ffb84d;
+    border-radius: 8px;
+    background: #fffbeb;
+    color: var(--warning);
+    padding: 12px;
+}
+
+.consultation-form {
+    display: grid;
+    gap: 18px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.record-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 14px;
+    border-radius: 8px;
+    background: var(--surface-alt);
+    padding: 18px;
+}
+
+.record-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+}
+
+.record-grid span,
+.record-grid strong {
+    display: block;
+}
+
+.profile-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.avatar {
+    display: grid;
+    place-items: center;
+    width: 84px;
+    height: 84px;
+    border: 4px solid var(--primary-strong);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--primary-strong);
+    font-size: 34px;
+    font-weight: 900;
+}
+
+.status.paid {
+    background: #ecfdf3;
+    color: var(--success);
+}
+
+code {
+    border-radius: 6px;
+    background: #eef8fb;
+    padding: 2px 5px;
+}
+
+.error-logo {
+    display: block;
+    width: min(280px, 100%);
+    height: 80px;
+    object-fit: contain;
+    object-position: center;
+    margin: 0 auto 18px;
+}
+
+@media (max-width: 920px) {
+    .page-head,
+    .list-row {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .record-card,
+    .profile-summary {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* =====================================================================
+ * BREAKPOINTS MOBILE-FIRST
+ * < 640px  -> estilos-base acima (celulares)
+ * 640–1024px -> tablets (esta faixa)
+ * > 1024px -> desktops/laptops (faixa seguinte)
+ * ===================================================================== */
+
+@media (min-width: 640px) {
+    .shell {
+        width: min(1180px, calc(100% - 32px));
+        margin: 28px auto 56px;
+    }
+
+    .app-footer {
+        width: min(1180px, calc(100% - 32px));
+    }
+
+    .topbar {
+        gap: 20px;
+        min-height: 68px;
+        padding: 12px 110px 12px 28px;
+    }
+
+    .brand-logo {
+        width: 190px;
+        height: 72px;
+    }
+
+    .page-head h1,
+    .auth-copy h1,
+    .form-card h1 {
+        font-size: 32px;
+    }
+
+    .panel {
+        padding: 20px;
+    }
+
+    .grid.two,
+    .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .filters {
+        grid-template-columns: repeat(2, minmax(140px, 1fr));
+    }
+
+    .filters.compact {
+        grid-template-columns: repeat(2, minmax(140px, 1fr)) auto;
+    }
+
+    .slot-grid {
+        grid-template-columns: repeat(4, minmax(88px, 1fr));
+    }
+
+    .record-grid {
+        grid-template-columns: 200px minmax(0, 1fr);
+    }
+
+    .auth-copy {
+        padding: 32px;
+    }
+}
+
+@media (min-width: 1024px) {
+    /* Menu volta a ficar sempre visível, sem o botão hambúrguer (que só
+       existe para telas pequenas/tablet) — agora como uma pílula
+       flutuante centralizada no topo, separada da logo.
+
+       Técnica: o .topbar continua em flexbox (igual já era), com a
+       logo e o espaço reservado do Sair como dois lados "elásticos" de
+       peso igual (flex: 1 1 0, cada um) e o menu no meio com tamanho
+       fixo (flex: 0 0 auto). Como os dois lados crescem sempre na
+       mesma proporção um do outro, o menu no meio fica sempre
+       exatamente centralizado entre eles — não importa o quanto a
+       logo ou o espaço do Sair variem de largura. A ordem visual é
+       controlada por "order" (independente da ordem real no HTML). */
+    .topbar {
+        flex-wrap: nowrap;
+    }
+
+    .brand {
+        order: 1;
+        flex: 1 1 0;
+    }
+
+    .nav-toggle {
+        display: none;
+    }
+
+    .nav {
+        order: 2;
+        flex: 0 0 auto;
+        display: flex !important;
+        position: static;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: nowrap;
+        gap: 2px;
+        margin: 0;
+        padding: 6px;
+        max-height: none;
+        overflow: visible;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+    }
+
+    .topbar-actions {
+        order: 3;
+        flex: 1 1 0;
+        justify-content: flex-end;
+    }
+
+    .nav a {
+        padding: 9px 16px;
+        border-radius: 999px;
+        white-space: nowrap;
+        transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .nav a:hover {
+        background: var(--surface-alt);
+    }
+
+    .nav a.active {
+        background: var(--primary-strong);
+        color: #fff;
+    }
+
+    .stats {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .filters {
+        grid-template-columns: repeat(5, minmax(120px, 1fr));
+    }
+
+    .filters.compact {
+        grid-template-columns: repeat(4, minmax(100px, 1fr)) auto;
+    }
+
+    .auth-grid {
+        grid-template-columns: minmax(0, 1.05fr) minmax(320px, 420px);
+        gap: 28px;
+        min-height: calc(100vh - 160px);
+    }
+
+    .record-grid {
+        grid-template-columns: 240px minmax(0, 1fr);
+    }
+}
+
+/* Badge de classificação de movimentação mensal (tela de Relatórios) */
+.movement-badge {
+    display: inline-block;
+    margin: 14px 0 10px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 14px;
+}
+
+.movement-badge.movement-high {
+    background: #ecfdf3;
+    color: var(--success);
+}
+
+.movement-badge.movement-good {
+    background: #dff7fb;
+    color: var(--primary-strong);
+}
+
+.movement-badge.movement-low {
+    background: #fff7ed;
+    color: var(--warning);
+}
+
+/* Relatório imprimível (tela de Relatórios) — NUNCA aparece na tela
+   normal (fica posicionado fora da área visível, não com display:none,
+   porque um elemento com display:none tem tamanho zero e o gráfico
+   dentro dele (Chart.js) não conseguiria se desenhar direito; assim
+   ele continua "existindo" para o navegador — só não é visível). Ao
+   imprimir, o bloco @media print mais abaixo traz ele de volta pro
+   fluxo normal da página, e some com todo o resto. */
+.print-report {
+    position: absolute;
+    top: 0;
+    left: -9999px;
+    width: 190mm;
+    margin-top: 18px;
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+}
+
+.print-report-head {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.print-report-head h1 {
+    margin: 0 0 4px;
+    font-size: 22px;
+}
+
+.print-report-head p {
+    margin: 0;
+    color: var(--muted);
+}
+
+.print-report-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.print-report-summary div {
+    text-align: center;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+}
+
+.print-report-summary span {
+    display: block;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 4px;
+}
+
+.print-report-summary strong {
+    font-size: 22px;
+}
+
+.print-report-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.print-report-table th,
+.print-report-table td {
+    border: 1px solid var(--line);
+    padding: 8px 10px;
+    text-align: left;
+}
+
+.print-report-footer {
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: right;
+}
+
+@media print {
+    /* Formato e margens da folha A4 — sem isso, cada navegador usa um
+       tamanho/margem padrão diferente, o que é a causa mais comum de
+       relatório "desalinhado" ao imprimir. */
+    @page {
+        size: A4 portrait;
+        margin: 14mm 12mm;
+    }
+
+    html,
+    body {
+        background: #fff;
+    }
+
+    .topbar,
+    .page-head,
+    .app-footer,
+    section.panel {
+        display: none !important;
+    }
+
+    .shell {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .print-report {
+        display: block !important;
+        position: static;
+        top: auto;
+        left: auto;
+        width: 100%;
+        border: none;
+        padding: 0;
+        margin: 0;
+        box-shadow: none;
+    }
+
+    /* Evita que uma linha da tabela ou um cartão do resumo seja
+       cortado ao meio entre uma página e outra. */
+    .print-report-summary div,
+    .print-report-table tr {
+        break-inside: avoid;
+    }
+
+    .print-report-head {
+        break-after: avoid;
+    }
+
+    .print-report-summary {
+        break-inside: avoid;
+    }
+
+    /* O gráfico é um <canvas> — ocupa a largura útil da folha, com
+       altura fixa, pra não sair espremido nem cortado na impressão. */
+    .print-report canvas {
+        width: 100% !important;
+        max-width: 100%;
+        height: 260px !important;
+        break-inside: avoid;
+    }
+
+    .print-report-table {
+        font-size: 12px;
+    }
+
+    .print-report-table th,
+    .print-report-table td {
+        padding: 6px 8px;
+    }
+
+    /* Garante que cores de fundo/borda saiam na impressão mesmo se o
+       navegador estiver com "imprimir imagens de fundo" desligado por
+       padrão nas cores que realmente importam pro relatório. */
+    .movement-badge {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}

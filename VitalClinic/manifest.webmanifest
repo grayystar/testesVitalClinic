@@ -1,0 +1,19 @@
+{
+  "name": "Vital Clinic",
+  "short_name": "Vital Clinic",
+  "description": "Gestão de consultas para administradores e médicos.",
+  "lang": "pt-BR",
+  "start_url": "./index.php?page=dashboard",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f7fb",
+  "theme_color": "#0f766e",
+  "icons": [
+    {
+      "src": "assets/brand/vital-clinic-mark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
