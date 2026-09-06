@@ -35,3 +35,13 @@ jobs:
 
       - name: Teste de Consultas
         run: php tests/tests_consultas.php
+
+      - name: Gerar artefato do projeto
+        run: |
+          zip -r VitalClinic.zip VitalClinic
+          
+      - name: Publicar artefato
+        uses: actions/upload-artifact@v4
+        with:
+          name: VitalClinic
+          path: VitalClinic.zip
